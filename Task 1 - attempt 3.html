@@ -79,7 +79,7 @@
                     Age &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:<input type="number" name="age" id="age" placeholder="Your age...">  
                     </font>
                     
-                    <button onclick="todo(table);" class="button">Add</button>
+                    <button onclick="todo();" class="button">Add</button>
                     <button onclick="updateRow();" class="button">Update</button>
                     <button onclick="deleteRow();" class="button">Delete</button>
                       <br>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="form1">
                     <table id="table" border="1" class="table">
-                      
+                      <tbody id="tableToModify">
                         <tr>
                             <th>#</th>
                             <th>First Name</th>
@@ -100,33 +100,23 @@
                             <td>Shaymoli</td>
                             <td>25</td>
                         </tr>
-                      
+                      </tbody>
                     </table>
                 </div>
                 
             </div>
             
             <script>
-                function todo(table){
-                  addRow(table); clone(table);
+                function todo(){
+                  addRow(); clone();
                 }
-
-                function clone(table){
-                  var objTable = document.getElementById(table);
-                  var objRow = objTable.insertRow(objTable.rows.length);
-
-                  var objCell1 = objRow.insertCell(0);
-                  var objInputCheckBox = document.createElement("input");
-                  objInputCheckBox.type = "checkbox";
-                  objCell1.appendChild(objInputCheckBox);
+                function clone(){
+                    var objInputCheckBox = document.createElement("input");
+                    objInputCheckBox.type = "checkbox";
+                    objCell0.appendChild(objInputCheckBox);
                 }
-              
-                function deleteRow1(row){   
-                    {   
-                         var i=row.parentNode.parentNode.rowIndex;
-                          document.getElementById("table").deleteRow(i);
-                      }
-                  }
+                
+                  
                 var rIndex,
                     table = document.getElementById("table");
                 
@@ -152,24 +142,22 @@
                     return isEmpty;
                 }
 
-                function addRow(table)
+                function addRow()
                 {
 
                     if(!checkEmptyInput()){
                     var newRow = table.insertRow(table.length),
-                        cell1 = newRow.insertCell(0),
-                        cell2 = newRow.insertCell(1),
-                        cell3 = newRow.insertCell(2),
-                        cell4 = newRow.insertCell(3),
+                        cell1 = newRow.insertCell(1),
+                        cell2 = newRow.insertCell(2),
+                        cell3 = newRow.insertCell(3),
                         name = document.getElementById("name").value,
                         address = document.getElementById("address").value,
                         age = document.getElementById("age").value;
                 
-                    cell2.innerHTML = name;
-                    cell3.innerHTML = address;
-                    cell4.innerHTML = age;
+                    cell1.innerHTML = name;
+                    cell2.innerHTML = address;
+                    cell3.innerHTML = age;
                     selectedRowToInput();
-                    
 
                     }
                     
@@ -184,9 +172,9 @@
                         table.rows[i].onclick = function()
                         {
                           rIndex = this.rowIndex;
-                          document.getElementById("name").value = this.cells[0].innerHTML;
-                          document.getElementById("address").value = this.cells[1].innerHTML;
-                          document.getElementById("age").value = this.cells[2].innerHTML;
+                          document.getElementById("name").value = this.cells[1].innerHTML;
+                          document.getElementById("address").value = this.cells[2].innerHTML;
+                          document.getElementById("age").value = this.cells[3].innerHTML;
                         };
                     }
                 }
