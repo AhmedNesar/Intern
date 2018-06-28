@@ -1,0 +1,149 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>ADD REMOVE EDIT</title>
+            <link rel="stylesheet" href="main2.css">
+      </head>
+      <body>
+         
+        <div class="form">
+         <form>
+          <label for="name">First Name:</label>
+          <input type="text" id="name" name="Name" placeholder="Your name.."><br>
+          <label for="address">Address&nbsp&nbsp&nbsp&nbsp:</label>
+          <input type="text" id="address" name="Address" placeholder="Your address.."><br>
+          <label for="Age">Age &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</label>
+          <input type="number" id="age" name="Age" placeholder="Your age..">
+         </form>
+      </div>
+
+</body>
+          <br>
+          <br>
+      
+      <p align="center">
+       
+        <input type="button" id="btnAdd" value="Add" class="button" onclick="addRow('tblLive')"/> 
+        <input type="button" id="btnDelete" value="Delete" class="button" onclick="removeRow('tblLive')"/>
+        <input type="button" id="btnDelete" value="Edit" class="button" onclick="updateRow('tblLive')"/>
+        <input type="button" id="btnClear" value="Clear" class="button" onclick="clear()"/>
+      
+      </p>
+      <div class="form1">
+                        <table id="tblLive" border="1" class="table">
+                          
+                            <tr>
+                                <th class="tbl-header">#</th>
+                                <th class="tbl-header">First Name</th>
+                                <th class="tbl-header">Address</th>
+                                <th class="tbl-header">Age</th>
+                            </tr>
+                          <tr>
+                                <td>#</td>
+                                <td>First Name</td>
+                                <td>Address</td>
+                                <td>25</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+ <script type="text/javascript">
+      
+                  {
+                      
+                      for(var i = 1; i < tblLive.rows.length; i++)
+                      {
+                          tblLive.rows[i].onclick = function()
+                          {
+                            rIndex = this.rowIndex;
+                            document.getElementById("name").value = this.cells[1].innerHTML;
+                            document.getElementById("address").value = this.cells[2].innerHTML;
+                            document.getElementById("age").value = this.cells[3].innerHTML;
+                          };
+                      }
+                  }
+                  selectedRowToInput();
+          function checkEmptyInput()
+                  {
+                      var isEmpty = false,
+                          name = document.getElementById("name").value,
+                          address = document.getElementById("address").value,
+                          age = document.getElementById("age").value;
+                  
+                      if(name === ""){
+                          alert("Name Can't Be Empty");
+                          isEmpty = true;
+                      }
+                      else if(address === ""){
+                          alert("Address Can't Be Empty");
+                          isEmpty = true;
+                      }
+                      else if(age === ""){
+                          alert("Age Can't Be Empty");
+                          isEmpty = true;
+                      }
+                      return isEmpty;
+                  }
+
+          
+        function addRow(id) {
+          if(!checkEmptyInput()){
+          var name = document.getElementById("name").value;
+          var address = document.getElementById("address").value;
+          var age = document.getElementById("age").value;
+
+          var objTable = document.getElementById(id);
+          var objRow = objTable.insertRow(objTable.rows.length);
+
+          var objCell1 = objRow.insertCell(0);
+          var objInputCheckBox = document.createElement("input");
+          objInputCheckBox.type = "checkbox";
+          objCell1.appendChild(objInputCheckBox);
+          
+                            
+          name = document.getElementById("name").value, 
+          address = document.getElementById("address").value,
+          age = document.getElementById("age").value;
+
+          var objCell2 = objRow.insertCell(1);
+          var objCell3 = objRow.insertCell(2);
+           var objCell4 = objRow.insertCell(3);
+          objCell2.innerHTML = name;
+          
+          objCell3.innerHTML = address;
+         
+          objCell4.innerHTML = age;
+
+          document.getElementById("name").value = "";
+          document.getElementById("address").value = "";
+          document.getElementById("age").value = "";
+        }
+      }
+        function removeRow(id) {
+          var objTable = document.getElementById(id);
+          var iRow = objTable.rows.length;
+          var counter = 0;
+          if (objTable.rows.length > 1) {
+            for (var i = 0; i < objTable.rows.length; i++) {
+              var chk = objTable.rows[i].cells[0].childNodes[0];
+              if (chk.checked) {
+                objTable.deleteRow(i);
+                iRow--;
+                i--;
+                counter = counter + 1;
+              }
+            }
+            if (counter == 0) {
+              alert("Please select the row that you want to delete.");
+            }
+          } else {
+            alert("There are no rows being added");
+          }
+        }
+       
+      </script>
+
+      </body>
+      </html>
+
